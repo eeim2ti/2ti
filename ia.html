@@ -3,62 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IA e IA Disfarçada</title>
+    <title>IA na Educação</title>
     <style>
-        /* Estilos Gerais */
+        /* Estilos Gerais Modernizados */
+        :root {
+            --primary: #6e48aa;
+            --secondary: #9d50bb;
+            --dark: #2c3e50;
+            --light: #f5f7fa;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --info: #3498db;
+            --edu: #3f51b5;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f2f5;
+            background-color: var(--light);
             color: #333;
         }
         
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
         
-        /* Menu */
+        h1, h2, h3, h4 {
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 30px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Menu Modernizado */
         .menu {
             display: flex;
-            background-color: #2c3e50;
-            border-radius: 8px;
+            background-color: white;
+            border-radius: 12px;
             overflow: hidden;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
         
         .menu-item {
-            padding: 15px 25px;
-            color: white;
+            padding: 18px 25px;
+            color: var(--dark);
             cursor: pointer;
             text-align: center;
             flex: 1;
             transition: all 0.3s ease;
-            font-weight: 500;
+            font-weight: 600;
+            position: relative;
         }
         
         .menu-item:hover {
-            background-color: #3498db;
-            transform: translateY(-2px);
+            color: var(--primary);
         }
         
         .menu-item.active {
-            background-color: #2980b9;
-            font-weight: bold;
-            box-shadow: inset 0 4px 8px rgba(0,0,0,0.2);
+            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
         }
         
-        /* Conteúdos */
+        .menu-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid white;
+        }
+        
+        /* Conteúdos Modernizados */
         .content {
             display: none;
             background-color: white;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             animation: fadeIn 0.5s ease;
         }
         
@@ -71,74 +114,180 @@
             display: block;
         }
         
-        /* Cards de IA */
+        /* Cards de IA - Estilo Moderno */
         .ia-card {
-            margin-bottom: 25px;
-            padding: 20px;
-            border-radius: 8px;
-            background-color: #f8f9fa;
-            border-left: 4px solid #3498db;
+            margin-bottom: 30px;
+            padding: 25px;
+            border-radius: 12px;
+            background-color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
         .ia-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .ia-card img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 6px;
-            margin: 15px 0;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
         
         .ia-card h3 {
-            color: #2c3e50;
-            margin-top: 0;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
         }
         
-        /* Destaques */
+        .ia-card h3::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .ia-img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .ia-img:hover {
+            transform: scale(1.05);
+        }
+        
+        .ia-card p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
         .destaque {
-            background-color: #e3f2fd;
-            padding: 10px 15px;
-            border-radius: 6px;
+            background-color: rgba(110, 72, 170, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 15px;
             margin: 15px 0;
-            border-left: 4px solid #2196f3;
+            border-radius: 0 8px 8px 0;
         }
         
         .numero {
-            display: inline-block;
-            background-color: #3498db;
-            color: white;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             width: 30px;
             height: 30px;
-            text-align: center;
-            line-height: 30px;
+            background-color: var(--primary);
+            color: white;
             border-radius: 50%;
             margin-right: 10px;
             font-weight: bold;
         }
         
-        /* Botão Voltar */
+        .uso-escola {
+            background-color: rgba(63, 81, 181, 0.1);
+            border-left: 4px solid var(--edu);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .uso-escola h4 {
+            color: var(--edu);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .uso-escola h4::before {
+            content: '🏫';
+            margin-right: 8px;
+        }
+        
+        .dicas {
+            background-color: rgba(243, 156, 18, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .dicas h4 {
+            color: var(--warning);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .dicas h4::before {
+            content: '💡';
+            margin-right: 8px;
+        }
+        
+        /* Botão Voltar Modernizado */
         .back-button {
-            display: block;
-            width: 200px;
-            margin: 30px auto 0;
-            background-color: #2c3e50;
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             text-align: center;
-            padding: 12px;
-            border-radius: 6px;
+            border-radius: 30px;
             text-decoration: none;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            margin: 30px auto 0;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(110, 72, 170, 0.3);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
         }
         
         .back-button:hover {
-            background-color: #3498db;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(110, 72, 170, 0.4);
+        }
+        
+        .back-button:active {
+            transform: translateY(1px);
+        }
+        
+        /* Lista de Ferramentas */
+        .ferramentas-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .ferramenta {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 3px solid var(--info);
+            transition: all 0.3s ease;
+        }
+        
+        .ferramenta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .ferramenta h4 {
+            color: var(--info);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .ferramenta h4::before {
+            content: '🔧';
+            margin-right: 8px;
         }
         
         /* Responsivo */
@@ -147,150 +296,294 @@
                 flex-direction: column;
             }
             
+            .menu-item {
+                padding: 15px;
+            }
+            
+            .menu-item.active::after {
+                display: none;
+            }
+            
             .container {
                 padding: 15px;
             }
             
-            .ia-card {
-                padding: 15px;
+            .content {
+                padding: 20px;
             }
             
-            .back-button {
-                width: 100%;
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .ferramentas-list {
+                grid-template-columns: 1fr;
             }
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  
     <div class="container">
-        <h1 style="text-align: center; color: #2c3e50; margin-bottom: 30px;">IA</h1>
+        <h1>Inteligência Artificial na Educação</h1>
         
         <!-- Menu Principal -->
         <div class="menu">
-            <div class="menu-item active" onclick="showContent('top-ia')">Top 5 IAs</div>
-            <div class="menu-item" onclick="showContent('ia-disfarce')">IA que Disfarça IA</div>
+            <div class="menu-item active" onclick="showContent('escola')">IA para Escola</div>
+            <div class="menu-item" onclick="showContent('disfarcar')">Disfarçando IA</div>
         </div>
         
-        <!-- Conteúdo: Top 5 IAs -->
-        <div id="top-ia-content" class="content active">
-            <h2 style="color: #2980b9; text-align: center;">Top 5 Inteligências Artificiais</h2>
+        <!-- Conteúdo: IA para Escola -->
+        <div id="escola-content" class="content active">
+            <h2 style="color: var(--edu); text-align: center;">Ferramentas de IA para Auxílio Escolar</h2>
+            <p>Descubra como a inteligência artificial pode ajudar em trabalhos, pesquisas e estudos de forma ética e eficiente.</p>
             
-            <!-- ChatGPT -->
+            <!-- ChatGPT para Educação -->
             <div class="ia-card">
-                <h3><span class="numero">1</span> ChatGPT (OpenAI)</h3>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/240px-ChatGPT_logo.svg.png" alt="ChatGPT">
-                <p><strong>O que faz:</strong> Conversa como humano, escreve textos, explica conceitos, gera ideias e códigos.</p>
-                <p><strong>Uso real:</strong> Assistente virtual, tutor de estudos, gerador de conteúdo.</p>
+                <h3><span class="numero">1</span> ChatGPT para Trabalhos Escolares</h3>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/240px-ChatGPT_logo.svg.png" alt="ChatGPT" class="ia-img">
+                <p><strong>O que faz:</strong> Gera textos, resume conteúdos, explica conceitos complexos e ajuda na estruturação de trabalhos.</p>
+                
+                <div class="uso-escola">
+                    <h4>Como usar na escola:</h4>
+                    <ul>
+                        <li><strong>Gerar ideias</strong> para temas de trabalhos</li>
+                        <li><strong>Explicar conceitos</strong> difíceis de forma simples</li>
+                        <li><strong>Revisar textos</strong> e sugerir melhorias</li>
+                        <li><strong>Criar resumos</strong> de livros e artigos longos</li>
+                    </ul>
+                </div>
                 
                 <div class="destaque">
-                    <p><strong>🤖 Curiosidade:</strong> Já passou em exames de Direito e Medicina, mas ainda comete erros básicos.</p>
+                    <p><strong>Prompt útil:</strong> "Explique o conceito de [tema] como se eu tivesse 15 anos, com exemplos do cotidiano e uma analogia simples."</p>
                 </div>
             </div>
             
-            <!-- MidJourney -->
+            <!-- Geradores de Apresentações -->
             <div class="ia-card">
-                <h3><span class="numero">2</span> MidJourney</h3>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Midjourney_Emblem.png/240px-Midjourney_Emblem.png" alt="MidJourney">
-                <p><strong>O que faz:</strong> Cria imagens impressionantes a partir de descrições textuais.</p>
-                <p><strong>Uso real:</strong> Arte digital, conceitos para games, ilustrações para livros.</p>
+                <h3><span class="numero">2</span> Geradores de Slides e Apresentações</h3>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM4tOdCnOrf9TesZ74qKEnLQv2FHz8ozEgRhKkr1By3ESRWWngB9ofL2SC&s=10" alt="Slides IA" class="ia-img">
+                <p><strong>O que faz:</strong> Cria apresentações profissionais automaticamente a partir de um texto ou tópicos.</p>
                 
-                <div class="destaque">
-                    <p><strong>🎨 Curiosidade:</strong> Suas imagens já foram usadas em capas de revistas famosas sem que percebessem que era IA.</p>
+                <div class="uso-escola">
+                    <h4>Ferramentas recomendadas:</h4>
+                    <div class="ferramentas-list">
+                        <div class="ferramenta">
+                            <h4>Gamma.app</h4>
+                            <p>Gera slides bonitos com design automático a partir de um texto</p>
+                            <p><strong>Dica:</strong> Pode conectar com o ChatGPT para criar conteúdo</p>
+                        </div>
+                        <div class="ferramenta">
+                            <h4>Beautiful.ai</h4>
+                            <p>Cria apresentações com design profissional automaticamente</p>
+                            <p><strong>Dica:</strong> Tem modelos específicos para trabalhos escolares</p>
+                        </div>
+                        <div class="ferramenta">
+                            <h4>SlidesGPT</h4>
+                            <p>Gera slides completos a partir de um prompt simples</p>
+                            <p><strong>Dica:</strong> Funciona direto no navegador sem instalar nada</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dicas">
+                    <h4>Como disfarçar:</h4>
+                    <ul>
+                        <li>Personalize os slides com suas próprias imagens</li>
+                        <li>Adicione comentários pessoais em cada slide</li>
+                        <li>Altere a ordem e estrutura gerada pela IA</li>
+                    </ul>
                 </div>
             </div>
             
-            <!-- GitHub Copilot -->
+            <!-- Ferramentas de Resumo -->
             <div class="ia-card">
-                <h3><span class="numero">3</span> GitHub Copilot</h3>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Copilot_logo.svg/240px-GitHub_Copilot_logo.svg.png" alt="GitHub Copilot">
-                <p><strong>O que faz:</strong> Sugere códigos e completa linhas automaticamente enquanto você programa.</p>
-                <p><strong>Uso real:</strong> Aumenta produtividade de desenvolvedores, ajuda a aprender novas linguagens.</p>
+                <h3><span class="numero">3</span> Ferramentas de Resumo e Análise</h3>
+                <img src="https://cdn-icons-png.flaticon.com/512/3281/3281289.png" alt="Resumo IA" class="ia-img">
+                <p><strong>O que faz:</strong> Resume textos longos, destaca pontos principais e gera mapas mentais.</p>
                 
-                <div class="destaque">
-                    <p><strong>💻 Curiosidade:</strong> Consegue imitar o estilo de código do programador que está usando.</p>
+                <div class="uso-escola">
+                    <h4>Melhores opções:</h4>
+                    <ul>
+                        <li><strong>Scholarcy</strong> - Resume artigos acadêmicos</li>
+                        <li><strong>Glasp</strong> - Marca e resume trechos importantes</li>
+                        <li><strong>Notion AI</strong> - Resume notas e documentos</li>
+                    </ul>
+                </div>
+                
+                <div class="dicas">
+                    <h4>Como usar sem parecer IA:</h4>
+                    <ul>
+                        <li>Combine resumos de diferentes ferramentas</li>
+                        <li>Adicione suas próprias palavras e exemplos</li>
+                        <li>Reescreva partes com suas expressões típicas</li>
+                    </ul>
                 </div>
             </div>
             
-            <!-- DeepL -->
+            <!-- IA para Matemática -->
             <div class="ia-card">
-                <h3><span class="numero">4</span> DeepL</h3>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/DeepL_logo.svg/240px-DeepL_logo.svg.png" alt="DeepL">
-                <p><strong>O que faz:</strong> Traduz textos entre idiomas com qualidade quase humana.</p>
-                <p><strong>Uso real:</strong> Tradução de documentos, livros, comunicação internacional.</p>
+                <h3><span class="numero">4</span> Ajudantes de Matemática e Ciências</h3>
+                <img src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" alt="Matemática IA" class="ia-img">
+                <p><strong>O que faz:</strong> Resolve problemas, explica passos de cálculos e gera gráficos.</p>
                 
-                <div class="destaque">
-                    <p><strong>🌍 Curiosidade:</strong> Muitos tradutores profissionais usam como ferramenta de apoio.</p>
+                <div class="uso-escola">
+                    <h4>Ferramentas úteis:</h4>
+                    <div class="ferramentas-list">
+                        <div class="ferramenta">
+                            <h4>Photomath</h4>
+                            <p>Resolve equações matemáticas mostrando todos os passos</p>
+                        </div>
+                        <div class="ferramenta">
+                            <h4>Wolfram Alpha</h4>
+                            <p>Resolve problemas complexos de matemática, física e química</p>
+                        </div>
+                        <div class="ferramenta">
+                            <h4>Symbolab</h4>
+                            <p>Calculadora inteligente com explicações detalhadas</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dicas">
+                    <h4>Como aprender de verdade:</h4>
+                    <ul>
+                        <li>Use para verificar respostas, não apenas copiar</li>
+                        <li>Peça para explicar cada passo da solução</li>
+                        <li>Tente resolver antes e use a IA para corrigir</li>
+                    </ul>
                 </div>
             </div>
             
-            <!-- IBM Watson -->
-            <div class="ia-card">
-                <h3><span class="numero">5</span> IBM Watson</h3>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/IBM_Watson_Logo.png/240px-IBM_Watson_Logo.png" alt="IBM Watson">
-                <p><strong>O que faz:</strong> Análise de dados complexos, diagnóstico médico, atendimento ao cliente.</p>
-                <p><strong>Uso real:</strong> Hospitais, call centers, análise de mercado.</p>
-                
-                <div class="destaque">
-                    <p><strong>🏥 Curiosidade:</strong> Ajuda médicos a diagnosticar câncer com maior precisão que métodos tradicionais.</p>
-                </div>
-            </div>
-            
-            <a href="inicio.html" class="back-button">Voltar ao Menu</a>
+            <button class="back-button" onclick="location.href='inicio.html'">Voltar ao Menu</button>
         </div>
         
-        <!-- Conteúdo: IA que Disfarça IA -->
-        <div id="ia-disfarce-content" class="content">
-            <h2 style="color: #2980b9; text-align: center;">IA que Disfarça ser Humana</h2>
+        <!-- Conteúdo: Disfarçando IA -->
+        <div id="disfarcar-content" class="content">
+            <h2 style="color: var(--warning); text-align: center;">Como Disfarçar o Uso de IA em Trabalhos Escolares</h2>
+            <p>Técnicas para usar IA como ferramenta de apoio sem deixar óbvio que o trabalho foi gerado automaticamente.</p>
             
+            <!-- Técnicas Básicas -->
             <div class="ia-card">
-                <h3>Humanizando a IA</h3>
-                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="IA disfarçada">
-                <p>Algumas IAs são projetadas especificamente para parecerem humanas, seja em textos, vozes ou comportamentos.</p>
+                <h3><span class="numero">1</span> Técnicas de Humanização</h3>
+                <img src="https://cdn-icons-png.flaticon.com/512/2491/2491992.png" alt="Humanizar IA" class="ia-img">
+                <p>Textos gerados por IA têm padrões que professores podem identificar. Veja como deixar seu trabalho mais "humano":</p>
                 
-                <h4>Técnicas de Disfarce:</h4>
-                <ol>
-                    <li><strong>Erros calculados:</strong> Inserir pequenos erros gramaticais ou hesitações</li>
-                    <li><strong>Estilo pessoal:</strong> Desenvolver uma "personalidade" consistente</li>
-                    <li><strong>Emoções simuladas:</strong> Expressar sentimentos como frustração ou empolgação</li>
-                    <li><strong>Referências culturais:</strong> Usar gírias e referências contemporâneas</li>
-                </ol>
+                <div class="destaque">
+                    <h4>Padrões comuns da IA:</h4>
+                    <ul>
+                        <li>Linguagem muito formal e genérica</li>
+                        <li>Estrutura perfeita demais</li>
+                        <li>Falta de erros pequenos</li>
+                        <li>Referências muito genéricas</li>
+                    </ul>
+                </div>
+                
+                <div class="uso-escola">
+                    <h4>Técnicas para disfarçar:</h4>
+                    <ol>
+                        <li><strong>Adicione erros calculados</strong> - Troque algumas palavras por sinônimos menos perfeitos</li>
+                        <li><strong>Inclua opiniões pessoais</strong> - Adicione 2-3 frases com sua visão sobre o tema</li>
+                        <li><strong>Altere a estrutura</strong> - Mude a ordem de alguns parágrafos</li>
+                        <li><strong>Use gírias e expressões suas</strong> - Adicione frases como "eu acho que..."</li>
+                    </ol>
+                </div>
             </div>
             
+            <!-- Ferramentas de Disfarce -->
             <div class="ia-card">
-                <h3>Exemplos de IA Disfarçada</h3>
+                <h3><span class="numero">2</span> Ferramentas para Humanizar Textos</h3>
+                <img src="https://cdn-icons-png.flaticon.com/512/2491/2491971.png" alt="Ferramentas" class="ia-img">
+                <p>Algumas ferramentas podem ajudar a tornar textos gerados por IA menos óbvios:</p>
                 
-                <div class="destaque">
-                    <h4>1. Replika</h4>
-                    <p>Chatbot que simula ser um amigo humano, com memória de conversas passadas e "emoções".</p>
-                    <p><strong>Tática:</strong> Pergunta sobre seu dia e lembra de detalhes que você compartilhou antes.</p>
+                <div class="ferramentas-list">
+                    <div class="ferramenta">
+                        <h4>Quillbot</h4>
+                        <p>Reescreve textos mudando palavras e estrutura sem alterar o significado</p>
+                        <p><strong>Dica:</strong> Use o modo "Creative" para variações mais humanas</p>
+                    </div>
+                    <div class="ferramenta">
+                        <h4>Undetectable AI</h4>
+                        <p>Especializada em fazer textos de IA parecerem humanos</p>
+                        <p><strong>Dica:</strong> Não exagere ou o texto pode ficar estranho</p>
+                    </div>
+                    <div class="ferramenta">
+                        <h4>Wordtune</h4>
+                        <p>Oferece várias formas de reescrever cada frase</p>
+                        <p><strong>Dica:</strong> Combine sugestões diferentes para variar</p>
+                    </div>
                 </div>
                 
-                <div class="destaque">
-                    <h4>2. Deepfake de Voz</h4>
-                    <p>Sistemas que imitam vozes humanas com perfeição, usados em atendimento ao cliente.</p>
-                    <p><strong>Tática:</strong> Inclui respirações e pausas naturais na fala.</p>
-                </div>
-                
-                <div class="destaque">
-                    <h4>3. Geradores de Perfis Falsos</h4>
-                    <p>Criam pessoas completas com fotos, históricos e redes sociais convincentes.</p>
-                    <p><strong>Tática:</strong> Gera inconsistências pequenas e plausíveis na biografia.</p>
+                <div class="dicas">
+                    <h4>Verifique se seu texto parece humano:</h4>
+                    <ul>
+                        <li><strong>GLTR</strong> - Mostra padrões de texto gerado por IA</li>
+                        <li><strong>Originality.ai</strong> - Detecta conteúdo de IA</li>
+                        <li><strong>Seu próprio critério</strong> - Leia em voz alta, soa natural?</li>
+                    </ul>
                 </div>
             </div>
             
-            <div class="ia-card" style="background-color: #fff8e1; border-left-color: #ffc107;">
-                <h3>Como Identificar IA Disfarçada?</h3>
-                <ul>
-                    <li>Padrões muito perfeitos de resposta</li>
-                    <li>Falta de opiniões verdadeiramente pessoais</li>
-                    <li>Consistência excessiva (humanos são contraditórios)</li>
-                    <li>Velocidade de resposta não humana</li>
-                </ul>
-                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Detectando IA">
+            <!-- Como Professores Detectam -->
+            <div class="ia-card" style="background-color: rgba(231, 76, 60, 0.05); border-left-color: var(--danger);">
+                <h3><span class="numero">3</span> Como Professores Detectam IA</h3>
+                <img src="https://cdn-icons-png.flaticon.com/512/2491/2491911.png" alt="Detecção IA" class="ia-img">
+                <p>Entenda como os professores identificam trabalhos feitos com IA para evitar esses padrões:</p>
+                
+                <div class="uso-escola">
+                    <h4>Sinais que professores observam:</h4>
+                    <ul>
+                        <li><strong>Mudança abrupta de estilo</strong> entre trechos</li>
+                        <li><strong>Precisão excessiva</strong> em conceitos complexos</li>
+                        <li><strong>Falta de erros</strong> típicos da idade/ano escolar</li>
+                        <li><strong>Referências vagas</strong> ou inexistentes</li>
+                        <li><strong>Não consegue explicar</strong> o conteúdo pessoalmente</li>
+                    </ul>
+                </div>
+                
+                <div class="dicas">
+                    <h4>Como se proteger:</h4>
+                    <ol>
+                        <li>Esteja preparado para explicar qualquer parte do trabalho</li>
+                        <li>Inclua citações e referências reais</li>
+                        <li>Mantenha rascunhos e versões anteriores</li>
+                        <li>Use a IA como assistente, não como autor</li>
+                    </ol>
+                </div>
             </div>
             
-            <a href="inicio.html" class="back-button">Voltar ao Menu</a>
+            <!-- Uso Ético -->
+            <div class="ia-card" style="background-color: rgba(46, 204, 113, 0.05); border-left-color: var(--success);">
+                <h3><span class="numero">4</span> Uso Ético da IA na Escola</h3>
+                <img src="https://cdn-icons-png.flaticon.com/512/2491/2491944.png" alt="Ética IA" class="ia-img">
+                <p>A IA é uma ferramenta poderosa quando usada corretamente. Veja como aproveitar sem trapacear:</p>
+                
+                <div class="uso-escola">
+                    <h4>Usos aceitáveis:</h4>
+                    <ul>
+                        <li>Para <strong>explicar conceitos</strong> que você não entendeu</li>
+                        <li>Como <strong>ferramenta de revisão</strong> para seus textos</li>
+                        <li>Para <strong>gerar ideias</strong> quando estiver bloqueado</li>
+                        <li>Como <strong>assistente de pesquisa</strong> para encontrar fontes</li>
+                    </ul>
+                </div>
+                
+                <div class="destaque">
+                    <h4>Usos problemáticos:</h4>
+                    <ul>
+                        <li>Entregar trabalhos <strong>100% gerados por IA</strong> como se fossem seus</li>
+                        <li>Usar IA em <strong>avaliações que testam seu conhecimento</strong></li>
+                        <li><strong>Plagiar</strong> conteúdos gerados por IA sem citar</li>
+                    </ul>
+                </div>
+                
+                <div class="dicas">
+                    <h4>Dica final:</h4>
+                    <p>Use a IA como um <strong>tutor pessoal</strong>, não como um <strong>fazedor de trabalhos</strong>. O aprendizado real será útil para sua vida, enquanto a trapaça só prejudica você mesmo.</p>
+                </div>
+            </div>
+            
+            <button class="back-button" onclick="location.href='inicio.html'">Voltar ao Menu</button>
         </div>
     </div>
 

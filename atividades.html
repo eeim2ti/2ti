@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Estudos</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        /* Menu de Navegação */
+        .menu-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .menu {
+            display: flex;
+            background: white;
+            border-radius: 50px;
+            padding: 5px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow-x: auto;
+            max-width: 100%;
+        }
+        
+        .menu-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s ease;
+            text-align: center;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .menu-item:hover {
+            color: #6e48aa;
+        }
+        
+        .menu-item.active {
+            background: linear-gradient(135deg, #6e48aa 0%, #9d50bb 100%);
+            color: white;
+            border-radius: 50px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #6e48aa 0%, #9d50bb 100%);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .materia {
+            font-size: 2.2rem;
+            margin: 0;
+            font-weight: 700;
+        }
+        
+        .tema {
+            font-size: 1.8rem;
+            margin: 10px 0 0;
+            font-weight: 600;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-left: 5px solid #9d50bb;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            color: #6e48aa;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-title .emoji {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .conceito {
+            margin-bottom: 20px;
+        }
+        
+        .conceito-title {
+            font-weight: 600;
+            color: #555;
+            display: flex;
+            align-items: center;
+        }
+        
+        .conceito-title .emoji {
+            margin-right: 8px;
+        }
+        
+        .exemplo {
+            background: #f0e6ff;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-style: italic;
+        }
+        
+        .resumo {
+            background: #e6f7ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: monospace;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        
+        .destaque {
+            background: #fff9e6;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 4px solid #ffcc00;
+        }
+        
+        .destaque-title {
+            font-weight: 600;
+            color: #d4a017;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .destaque-title .emoji {
+            margin-right: 8px;
+        }
+        
+        hr {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, rgba(0,0,0,0), rgba(110,72,170,0.5), rgba(0,0,0,0));
+            margin: 40px 0;
+        }
+        
+        /* Conteúdo oculto por padrão */
+        .conteudo-materia {
+            display: none;
+        }
+        
+        .conteudo-materia.ativo {
+            display: block;
+        }
+        
+        /* Estilos específicos para Geografia */
+        .card-geo {
+            border-left: 5px solid #4CAF50;
+        }
+        
+        .card-geo .card-title {
+            color: #2E7D32;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin: 20px 0;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #4CAF50;
+            border: 3px solid #81C784;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 12px;
+            width: 2px;
+            height: 100%;
+            background: #81C784;
+        }
+        
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: #2E7D32;
+        }
+
+        /* Estilos para História */
+        .semana {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #FF5722;
+        }
+        
+        .semana-title {
+            font-weight: 600;
+            color: #FF5722;
+        }
+
+        /* Estilos para Platão */
+        .teoria-platao {
+            background: #f3e5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .parte-alma {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        
+        .parte-alma .emoji {
+            font-size: 2rem;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        /* Estilos para Matemática */
+        .passo-a-passo {
+            background: #FFF3E0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .passo {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .passo-num {
+            background: #FF9800;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        .figura {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 3rem;
+        }
+        
+        /* Estilos para Física */
+        .card-fisica {
+            border-left: 5px solid #2196F3;
+        }
+        
+        .card-fisica .card-title {
+            color: #1976D2;
+        }
+        
+        .unidades {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 10px 0;
+        }
+        
+        .unidade {
+            background: #E3F2FD;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+        
+        .formula {
+            font-family: monospace;
+            background: #f5f5f5;
+            padding: 8px;
+            border-radius: 4px;
+            margin: 5px 0;
+        }
+        
+        .dica {
+            background: #e8f5e9;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu de Navegação -->
+    <div class="menu-container">
+        <div class="menu">
+            <div class="menu-item" data-materia="filosofia">FILOSOFIA</div>
+            <div class="menu-item" data-materia="historia">HISTÓRIA</div>
+            <div class="menu-item" data-materia="geografia">GEOGRAFIA</div>
+            <div class="menu-item active" data-materia="matematica">MATEMÁTICA</div>
+            <div class="menu-item" data-materia="fisica">FÍSICA</div>
+        </div>
+    </div>
+
+    <!-- MATEMÁTICA -->
+    <div id="matematica" class="conteudo-materia ativo">
+        <div class="header">
+            <h1 class="materia">MATEMÁTICA</h1>
+            <h2 class="tema">Áreas de Figuras Planas</h2>
+        </div>
+        
+        <div class="card">
+            <h3 class="card-title"><span class="emoji">📐</span> Retângulo</h3>
+            
+            <div class="figura">▭</div>
+            
+            <div class="passo-a-passo">
+                <div class="passo">
+                    <div class="passo-num">1</div>
+                    <div>
+                        <strong>Fórmula:</strong>
+                        <div class="formula">Área = base × altura</div>
+                    </div>
+                </div>
+                
+                <div class="passo">
+                    <div class="passo-num">2</div>
+                    <div>
+                        <strong>Como calcular:</strong>
+                        <p>Meça com régua:</p>
+                        <ul>
+                            <li>Lado maior = base (b)</li>
+                            <li>Lado menor = altura (h)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="exemplo">
+                    <strong>Exemplo:</strong> Uma mesa de 80cm × 50cm
+                    <div class="formula">Área = 80 × 50 = 4.000cm²</div>
+                </div>
+            </div>
+            
+            <div class="dica">
+                <strong>Dica:</strong> Conte quadradinhos! Cada quadrado de 1cm × 1cm = 1cm².
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3 class="card-title"><span class="emoji">▲</span> Triângulo</h3>
+            
+            <div class="figura">▲</div>
+            
+            <div class="passo-a-passo">
+                <div class="passo">
+                    <div class="passo-num">1</div>
+                    <div>
+                        <strong>Fórmula:</strong>
+                        <div class="formula">Área = (base × altura) ÷ 2</div>
+                    </div>
+                </div>
+                
+                <div class="passo">
+                    <div class="passo-num">2</div>
+                    <div>
+                        <strong>Passo a passo:</strong>
+                        <ol>
+                            <li>Meça a base (b)</li>
+                            <li>Meça a altura (h) - deve formar ângulo reto com a base</li>
+                            <li>Multiplique b × h</li>
+                            <li>Divida por 2</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="exemplo">
+                    <strong>Exemplo:</strong> Triângulo com b=6cm e h=4cm
+                    <div class="formula">(6 × 4) ÷ 2 = 12cm²</div>
+                </div>
+            </div>
+            
+            <div class="destaque">
+                <strong>Por que dividir por 2?</strong> Porque um triângulo é metade de um retângulo com mesma base e altura!
+            </div>
+        </div>
+    </div>
+
+    <!-- FÍSICA -->
+    <div id="fisica" class="conteudo-materia">
+        <div class="header">
+            <h1 class="materia">FÍSICA</h1>
+            <h2 class="tema">Densidade</h2>
+        </div>
+        
+        <div class="card card-fisica">
+            <h3 class="card-title"><span class="emoji">⚖️</span> O que é Densidade?</h3>
+            
+            <div class="conceito">
+                <p>É a medida que mostra <strong>quanto de matéria</strong> está concentrada em <strong>um espaço</strong>.</p>
+                <div class="formula">Densidade = Massa ÷ Volume</div>
+            </div>
+            
+            <div class="exemplo">
+                <strong>Analogia:</strong> Imagine um pacote de algodão e uma barra de ouro do mesmo tamanho. O ouro é mais denso!
+            </div>
+        </div>
+        
+        <div class="card card-fisica">
+            <h3 class="card-title"><span class="emoji">🧮</span> Como Calcular</h3>
+            
+            <div class="passo-a-passo">
+                <div class="passo">
+                    <div class="passo-num">1</div>
+                    <div>
+                        <strong>Massa:</strong>
+                        <p>Pese o objeto na balança (em gramas ou kg)</p>
+                    </div>
+                </div>
+                
+                <div class="passo">
+                    <div class="passo-num">2</div>
+                    <div>
+                        <strong>Volume:</strong>
+                        <ul>
+                            <li><strong>Sólidos regulares:</strong> Use régua (comprimento × largura × altura)</li>
+                            <li><strong>Sólidos irregulares:</strong> Use proveta com água</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="passo">
+                    <div class="passo-num">3</div>
+                    <div>
+                        <strong>Divida:</strong>
+                        <p>Massa ÷ Volume</p>
+                        <div class="exemplo">
+                            <strong>Exemplo:</strong> Objeto com 200g e volume de 100cm³
+                            <div class="formula">200 ÷ 100 = 2g/cm³</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="unidades">
+                <div class="unidade">g/cm³</div>
+                <div class="unidade">kg/m³</div>
+                <div class="unidade">1g/cm³ = 1000kg/m³</div>
+            </div>
+            
+            <div class="destaque">
+                <h4 class="destaque-title"><span class="emoji">💡</span> Valores de Referência</h4>
+                <ul>
+                    <li>Água: 1g/cm³</li>
+                    <li>Ferro: 7,87g/cm³</li>
+                    <li>Madeira: ~0,6g/cm³</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- FILOSOFIA -->
+    <div id="filosofia" class="conteudo-materia">
+        <div class="header">
+            <h1 class="materia">FILOSOFIA</h1>
+            <h2 class="tema">Teorias da Alma</h2>
+        </div>
+        
+        <div class="card">
+            <h3 class="card-title"><span class="emoji">🌿</span> A Alma Segundo Aristóteles</h3>
+            
+            <div class="conceito">
+                <h4 class="conceito-title"><span class="emoji">🌟</span> O que é?</h4>
+                <p>A alma é o princípio vital que faz cada ser ser o que é! Para Aristóteles, existem três tipos:</p>
+            </div>
+            
+            <div class="conceito">
+                <h4 class="conceito-title"><span class="emoji">🌱</span> 1. Alma Vegetativa</h4>
+                <p>É o "motorzinho" básico da vida presente em <strong>plantas, animais e humanos</strong>.</p>
+                <p>Funções principais:</p>
+                <ul>
+                    <li><strong>Crescimento</strong> (de pequeno a grande)</li>
+                    <li><strong>Nutrição</strong> (transformar comida em energia)</li>
+                    <li><strong>Reprodução</strong> (criar novos seres)</li>
+                </ul>
+                <div class="exemplo">
+                    <strong>Exemplo:</strong> Uma semente virando árvore 🌱→🌳 usa sua alma vegetativa para crescer e se reproduzir (frutos com novas sementes).
+                </div>
+            </div>
+            
+            <div class="conceito">
+                <h4 class="conceito-title"><span class="emoji">🐾</span> 2. Alma Sensitiva</h4>
+                <p>Presente em <strong>animais e humanos</strong> - adiciona sensações e movimento!</p>
+                <p>Funções principais:</p>
+                <ul>
+                    <li><strong>Sensações</strong> (🔥 quente, 🥶 frio, 🍯 doce)</li>
+                    <li><strong>Desejos</strong> (🍗 fome, 💦 sede)</li>
+                    <li><strong>Movimento</strong> (🏃 correr, fugir do perigo)</li>
+                </ul>
+                <div class="exemplo">
+                    <strong>Como funciona?</strong> Seu olho 👀 tem potencial para ver. Quando olha para um 🍎 maçã, a "forma" da maçã é captada pela alma sensitiva!
+                </div>
+            </div>
+            
+            <div class="conceito">
+                <h4 class="conceito-title"><span class="emoji">🧠</span> 3. Alma Racional</h4>
+                <p>Exclusiva dos <strong>humanos</strong> - nos permite pensar, raciocinar e escolher!</p>
+                <p>Funções principais:</p>
+                <ul>
+                    <li><strong>Pensamento abstrato</strong> (entender justiça, amor, números)</li>
+                    <li><strong>Tomada de decisões</strong> (escolher entre o bem e o mal)</li>
+                    <li><strong>Virtude</strong> (agir com sabedoria)</li>
+                </ul>
+                <div class="exemplo">
+                    <strong>Exemplo:</strong> Você não só vê uma maçã 🍎, mas pensa: "Devo comer agora?" ou "Posso compartilhar?". Isso é a alma racional em ação!
+                </div>
+            </div>
+            
+            <div class="resumo">
+ALMA 🌟
+├── Vegetativa 🌱 (Plantas, Animais, Humanos)
+│   ├── Crescer
+│   ├── Alimentar
+│   └── Reproduzir
+├── Sensitiva 🐾 (Animais, Humanos)
+│   ├── Sentir
+│   ├── Desejar
+│   └── Mover
+└── Racional 🧠 (Só Humanos!)
+    ├── Pensar
+    ├── Decidir
+    └── Virtude
+            </div>
+            
+            <div class="destaque">
+                <h4 class="destaque-title"><span class="emoji">💡</span> Por que isso importa?</h4>
+                <p>Aristóteles mostra que os humanos são únicos por combinarmos <strong>corpo (vegetativo)</strong>, <strong>emoções (sensitivo)</strong> e <strong>razão (racional)</strong>. A felicidade vem do equilíbrio entre esses três!</p>
+            </div>
+        </div>
+        
+        <hr>
+        
+        <!-- Teoria de Platão sobre a Alma -->
+        <div class="header">
+            <h1 class="materia">FILOSOFIA</h1>
+            <h2 class="tema">Platão: A Alma Inteligível</h2>
+        </div>
+        
+        <div class="card">
+            <div class="teoria-platao">
+                <h3 class="card-title"><span class="emoji">🔮</span> A Alma Tripartida</h3>
+                
+                <div class="parte-alma">
+                    <span class="emoji">👑</span>
+                    <div>
+                        <h4>Parte Racional</h4>
+                        <p><strong>Localização:</strong> Cabeça</p>
+                        <p><strong>Função:</strong> Busca a verdade e o conhecimento das Formas</p>
+                        <p><strong>Virtude:</strong> Sabedoria</p>
+                    </div>
+                </div>
+                
+                <div class="parte-alma">
+                    <span class="emoji">🛡️</span>
+                    <div>
+                        <h4>Parte Irascível</h4>
+                        <p><strong>Localização:</strong> Peito</p>
+                        <p><strong>Função:</strong> Coragem, vontade e ânimo</p>
+                        <p><strong>Virtude:</strong> Fortaleza</p>
+                    </div>
+                </div>
+                
+                <div class="parte-alma">
+                    <span class="emoji">🍗</span>
+                    <div>
+                        <h4>Parte Apetitiva</h4>
+                        <p><strong>Localização:</strong> Ventre</p>
+                        <p><strong>Função:</strong> Desejos corporais (fome, sede, sexo)</p>
+                        <p><strong>Virtude:</strong> Temperança</p>
+                    </div>
+                </div>
+                
+                <div class="exemplo">
+                    <strong>Analogia da Carruagem:</strong> Platão compara a alma a uma carruagem puxada por dois cavalos (apetitivo e irascível) e guiada pelo cocheiro (racional).
+                </div>
+            </div>
+            
+            <div class="destaque">
+                <h4 class="destaque-title"><span class="emoji">🔄</span> Diferenças para Aristóteles</h4>
+                <ul>
+                    <li>Platão via a alma como <strong>pré-existente</strong> e <strong>imortal</strong></li>
+                    <li>Aristóteles a via como <strong>forma do corpo</strong> (não separada)</li>
+                    <li>Para Platão, a virtude vem da <strong>hierarquia</strong> entre as partes</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- HISTÓRIA -->
+    <div id="historia" class="conteudo-materia">
+        <div class="header">
+            <h1 class="materia">HISTÓRIA</h1>
+            <h2 class="tema">1º Bimestre: Idade Média</h2>
+        </div>
+        
+        <div class="card">
+            <!-- Semana 1-2 -->
+            <div class="semana">
+                <h3 class="semana-title">Semana 1-2: Formação do Feudalismo</h3>
+                <p><strong>Contexto:</strong> Queda do Império Romano (476 d.C.) + Invasões Bárbaras</p>
+                
+                <h4>Características do Sistema Feudal:</h4>
+                <ul>
+                    <li><strong>Economia:</strong> Agrícola de subsistência</li>
+                    <li><strong>Sociedade:</strong>
+                        <ul>
+                            <li>Nobreza (senhores feudais)</li>
+                            <li>Clero</li>
+                            <li>Servos (camponeses)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Política:</strong> Poder descentralizado</li>
+                </ul>
+                
+                <div class="exemplo">
+                    <strong>Exemplo:</strong> Cerimônia de homenagem - o vassalo jura lealdade ao senhor feudal em troca de proteção e terras.
+                </div>
+            </div>
+            
+            <!-- Semana 3-4 -->
+            <div class="semana">
+                <h3 class="semana-title">Semana 3-4: Igreja e Baixa Idade Média</h3>
+                
+                <h4>Papel da Igreja Católica:</h4>
+                <ul>
+                    <li>Controle da educação (escolas monásticas)</li>
+                    <li>Poder político (teocracia)</li>
+                    <li>Arte românica e gótica</li>
+                </ul>
+                
+                <h4>Renascimento Comercial (séc. XI-XIII):</h4>
+                <ul>
+                    <li>Surgimento das cidades (burgos)</li>
+                    <li>Feiras comerciais (Champagne)</li>
+                    <li>Crescimento da burguesia</li>
+                </ul>
+                
+                <h4>Peste Negra (1347-1351):</h4>
+                <ul>
+                    <li>Matou 1/3 da população europeia</li>
+                    <li>Crise do sistema feudal</li>
+                </ul>
+            </div>
+            
+            <!-- Semana 5-6 -->
+            <div class="semana">
+                <h3 class="semana-title">Semana 5-6: Transição para o Moderno</h3>
+                
+                <h4>Cruzadas (1096-1291):</h4>
+                <ul>
+                    <li>Reabertura do Mediterrâneo</li>
+                    <li>Contato com culturas orientais</li>
+                    <li>Fortaleceu as monarquias</li>
+                </ul>
+                
+                <h4>Crises do Século XIV:</h4>
+                <ul>
+                    <li>Guerra dos Cem Anos (1337-1453)</li>
+                    <li>Revoltas camponesas (Jacqueries)</li>
+                </ul>
+            </div>
+            
+            <!-- Semana 7 -->
+            <div class="semana">
+                <h3 class="semana-title">Semana 7: Avaliação Bimestral</h3>
+                <p><strong>Prova:</strong> 15 questões de múltipla escolha sobre:</p>
+                <ol>
+                    <li>Estrutura feudal</li>
+                    <li>Poder da Igreja</li>
+                    <li>Peste Negra</li>
+                    <li>Cruzadas</li>
+                </ol>
+                <div class="destaque">
+                    <p><strong>Dica de estudo:</strong> Foque nas relações de vassalagem e nos impactos das Cruzadas!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- GEOGRAFIA -->
+    <div id="geografia" class="conteudo-materia">
+        <div class="header">
+            <h1 class="materia">GEOGRAFIA</h1>
+            <h2 class="tema">Políticas Indígenas no Brasil</h2>
+        </div>
+        
+        <div class="card card-geo">
+            <h3 class="card-title"><span class="emoji">🌎</span> História das Políticas Indígenas</h3>
+            
+            <div class="conceito">
+                <h4 class="conceito-title"><span class="emoji">🕰️</span> Período Colonial</h4>
+                <p>Durante a colonização, os povos indígenas foram vistos como:</p>
+                <ul>
+                    <li><strong>Obstáculo</strong> à expansão territorial</li>
+                    <li><strong>Mão de obra</strong> escravizada (até a proibição em 1755)</li>
+                    <li><strong>Alvos de catequese</strong> (missões jesuíticas)</li>
+                </ul>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">1910</div>
+                    <p>Criação do <strong>SPI (Serviço de Proteção aos Índios)</strong> por Marechal Rondon, com o lema: <em>"Morrer se preciso for, matar nunca"</em>.</p>
+                    <div class="exemplo">
+                        Objetivo original: Proteger territórios indígenas e facilitar contato pacífico.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">1967</div>
+                    <p>SPI é substituído pela <strong>FUNAI</strong> (Fundação Nacional do Índio) devido a denúncias de corrupção e violência.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">1988</div>
+                    <p>Constituição Federal reconhece <strong>direitos originários</strong> dos povos indígenas sobre suas terras tradicionais.</p>
+                </div>
+            </div>
+            
+            <div class="conceito">
+                <h4 class="conceito-title"><span class="emoji">⚠️</span> Problemas e Conflitos</h4>
+                <ul>
+                    <li><strong>Perda territorial</strong>: Invasões por madeireiros, garimpeiros e fazendeiros</li>
+                    <li><strong>Doenças</strong>: Contato trouxe epidemias (ex: gripe, sarampo)</li>
+                    <li><strong>Assimilação forçada</strong>: Políticas que proibiam línguas e costumes tradicionais</li>
+                </ul>
+                
+                <div class="exemplo">
+                    <strong>Exemplo recente:</strong> Em 2022, o povo Yanomami sofreu com garimpo ilegal, desnutrição e mercúrio nos rios.
+                </div>
+            </div>
+            
+            <div class="destaque">
+                <h4 class="destaque-title"><span class="emoji">💡</span> Dados Atuais</h4>
+                <ul>
+                    <li><strong>305 povos</strong> indígenas no Brasil</li>
+                    <li><strong>274 línguas</strong> diferentes faladas</li>
+                    <li><strong>13% do território brasileiro</strong> são terras indígenas demarcadas</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card card-geo">
+            <h3 class="card-title"><span class="emoji">🗺️</span> Territórios Indígenas</h3>
+            
+            <div class="conceito">
+                <h4 class="conceito-title"><span class="emoji">📍</span> Regiões Críticas</h4>
+                <ul>
+                    <li><strong>Amazônia</strong>: Maior concentração de povos isolados</li>
+                    <li><strong>Mato Grosso do Sul</strong>: Conflitos com fazendeiros (ex: Guarani Kaiowá)</li>
+                    <li><strong>Nordeste</strong>: Luta por reconhecimento (ex: Pataxó na Bahia)</li>
+                </ul>
+            </div>
+            
+            <div class="conceito">
+                <h4 class="conceito-title"><span class="emoji">⚖️</span> Marco Temporal</h4>
+                <p>Polêmica sobre a tese de que só teriam direito à terra os povos que a ocupavam em <strong>5 de outubro de 1988</strong> (data da Constituição).</p>
+                <div class="exemplo">
+                    <strong>Problema:</strong> Muitos foram expulsos antes disso e não poderiam comprovar ocupação.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navegação entre matérias
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // Remove a classe 'active' de todos os itens
+                document.querySelectorAll('.menu-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+                
+                // Adiciona a classe 'active' apenas ao item clicado
+                this.classList.add('active');
+                
+                // Oculta todos os conteúdos
+                document.querySelectorAll('.conteudo-materia').forEach(conteudo => {
+                    conteudo.classList.remove('ativo');
+                });
+                
+                // Mostra o conteúdo correspondente
+                const materia = this.getAttribute('data-materia');
+                document.getElementById(materia).classList.add('ativo');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -3,285 +3,589 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu de Estudos</title>
+    <title>Guia Completo de Redes de Computadores</title>
     <style>
-        /* Estilos Gerais */
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+        /* Estilos Gerais Modernizados */
+        :root {
+            --primary: #6e48aa;
+            --secondary: #9d50bb;
+            --dark: #2c3e50;
+            --light: #f5f7fa;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --info: #3498db;
+        }
+        
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background-color: #f5f7fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: var(--light);
             color: #333;
         }
         
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
         
-        /* Menu */
+        h1, h2, h3, h4 {
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 30px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Menu Modernizado */
         .menu {
             display: flex;
-            background-color: #2c3e50;
-            border-radius: 8px;
+            background-color: white;
+            border-radius: 12px;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
         
         .menu-item {
-            padding: 15px 25px;
-            color: white;
+            padding: 18px 25px;
+            color: var(--dark);
             cursor: pointer;
             text-align: center;
             flex: 1;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            position: relative;
         }
         
         .menu-item:hover {
-            background-color: #3498db;
+            color: var(--primary);
         }
         
         .menu-item.active {
-            background-color: #2980b9;
-            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
         }
         
-        /* Conteúdos */
+        .menu-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid white;
+        }
+        
+        /* Conteúdos Modernizados */
         .content {
             display: none;
             background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .content.active {
             display: block;
         }
         
-        /* Estilos para o conteúdo de Redes */
+        /* Estilos para o conteúdo de Redes - Modernizado */
         .rede {
-            margin-bottom: 25px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #f9f9f9;
+            margin-bottom: 30px;
+            padding: 25px;
+            border-radius: 12px;
+            background-color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary);
+            transition: transform 0.3s ease;
         }
         
-        .rede img {
-            max-width: 100%;
+        .rede:hover {
+            transform: translateY(-5px);
+        }
+        
+        .rede h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .rede h3::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .rede-img {
+            width: 100%;
+            max-width: 200px;
             height: auto;
             display: block;
-            margin: 10px auto;
-            border: 1px solid #ccc;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .rede-img:hover {
+            transform: scale(1.05);
+        }
+        
+        .rede p {
+            margin-bottom: 15px;
+            line-height: 1.7;
         }
         
         .resposta {
-            background-color: #e8f4fc;
-            border-left: 4px solid #3498db;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 0 5px 5px 0;
+            background-color: rgba(110, 72, 170, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
         }
         
         .destaque {
-            background-color: #fffacd;
-            padding: 2px 5px;
-            border-radius: 3px;
+            background-color: rgba(46, 204, 113, 0.2);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--dark);
         }
         
-        h1, h2, h3 {
-            color: #2c3e50;
+        .exemplos {
+            background-color: rgba(52, 152, 219, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
         }
         
-        /* Estilos para as boxes de código */
+        .exemplos h4 {
+            color: var(--info);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .exemplos ul {
+            padding-left: 20px;
+        }
+        
+        .exemplos li {
+            margin-bottom: 8px;
+        }
+        
+        /* Estilos para as boxes de código - Modernizado */
         .code-box {
             background-color: #282c34;
-            border-radius: 8px;
-            margin-bottom: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .code-box:hover {
+            transform: translateY(-5px);
         }
         
         .code-header {
             background-color: #1e2227;
             color: white;
-            padding: 12px 20px;
+            padding: 15px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid #3b4048;
         }
         
         .code-title {
             font-weight: bold;
-            font-size: 1.1em;
+            font-size: 1.2rem;
+            font-family: 'Fira Code', monospace;
         }
         
         .copy-btn {
-            background-color: #61afef;
+            background-color: var(--info);
             color: white;
             border: none;
-            padding: 6px 12px;
-            border-radius: 4px;
+            padding: 8px 16px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 0.9em;
-            transition: background-color 0.2s;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .copy-btn:hover {
-            background-color: #528bff;
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn::before {
+            content: '📋';
         }
         
         .code-content {
-            padding: 15px;
+            padding: 20px;
             color: #abb2bf;
-            font-family: 'Consolas', 'Monaco', monospace;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
             white-space: pre;
             overflow-x: auto;
             line-height: 1.5;
             tab-size: 4;
+            font-size: 0.95rem;
         }
         
         .success-message {
-            color: #98c379;
+            color: var(--success);
             text-align: center;
-            margin-top: 10px;
+            margin: 10px 0;
             display: none;
+            font-weight: 600;
+            animation: fadeIn 0.3s ease;
         }
         
-        /* Botão Voltar */
+        /* Botão Voltar Modernizado */
         .back-button {
-            display: block;
-            width: 200px;
-            margin: 30px auto 0;
-            background-color: #2c3e50;
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             text-align: center;
-            padding: 12px;
-            border-radius: 6px;
+            border-radius: 30px;
             text-decoration: none;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            margin: 30px auto 0;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(110, 72, 170, 0.3);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
         }
         
         .back-button:hover {
-            background-color: #3498db;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(110, 72, 170, 0.4);
         }
         
-        /* Responsivo */
+        .back-button:active {
+            transform: translateY(1px);
+        }
+        
+        /* Seção de Introdução */
+        .intro {
+            background: linear-gradient(135deg, #f5f7fa, #e6e9f0);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .intro p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        /* Responsivo Melhorado */
         @media (max-width: 768px) {
             .menu {
                 flex-direction: column;
+            }
+            
+            .menu-item {
+                padding: 15px;
+            }
+            
+            .menu-item.active::after {
+                display: none;
             }
             
             .container {
                 padding: 15px;
             }
             
-            .rede {
-                padding: 15px;
+            .content {
+                padding: 20px;
             }
             
-            .back-button {
-                width: 100%;
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .rede {
+                padding: 20px;
             }
         }
         
+        /* Adicionando estilos para as novas redes */
+        .rede.pan { border-left-color: #9b59b6; }
+        .rede.lan { border-left-color: #3498db; }
+        .rede.wlan { border-left-color: #2ecc71; }
+        .rede.man { border-left-color: #e74c3c; }
+        .rede.wan { border-left-color: #f39c12; }
+        .rede.san { border-left-color: #1abc9c; }
+        .rede.vpn { border-left-color: #34495e; }
+        .rede.can { border-left-color: #e67e22; }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>Menu de Estudos</h1>
+        <h1>Guia Completo de Redes de Computadores</h1>
+        
+        <!-- Introdução -->
+        <div class="intro">
+            <p>Redes de computadores são como sistemas de estradas que conectam dispositivos, permitindo que eles compartilhem informações e recursos. Assim como existem ruas, avenidas e rodovias para diferentes necessidades de transporte, existem diferentes tipos de redes para diversas necessidades de comunicação digital.</p>
+            <p>Neste guia, vamos explorar os principais tipos de redes de computadores, desde as pequenas redes pessoais até as gigantescas redes globais, com explicações simples e exemplos do cotidiano.</p>
+        </div>
         
         <!-- Menu Principal -->
         <div class="menu">
-            <div class="menu-item active" onclick="showContent('redes')">Redes - Ossian</div>
-            <div class="menu-item" onclick="showContent('programacao')">Programação - Marcelo</div>
+            <div class="menu-item active" onclick="showContent('redes')">Redes - ossian</div>
+            <div class="menu-item" onclick="showContent('programacao')">programacao - marcelo</div>
         </div>
         
-        <!-- Conteúdo de Redes -->
+        <!-- Conteúdo de Redes - Aprimorado com mais redes -->
         <div id="redes-content" class="content active">
             <h2>Tipos de Redes de Computadores</h2>
+            <p>Conheça os diferentes tipos de redes, seus usos e características:</p>
             
             <!-- Rede PAN -->
-            <div class="rede">
-                <h3>Rede PAN (Rede Pessoal)</h3>
-                <img src="https://simpleicon.com/wp-content/uploads/bluetooth.png" alt="Bluetooth" width="150">
-                <p><strong>Para que serve?</strong> Conectar seus dispositivos pessoais próximos a você.</p>
-                <p><strong>Exemplos:</strong> Fone de ouvido sem fio, mouse Bluetooth, transferência de fotos entre celulares.</p>
+            <div class="rede pan">
+                <h3>Rede PAN (Rede de Área Pessoal)</h3>
+                <img src="https://cdn-icons-png.flaticon.com/512/2965/2965300.png" alt="Rede PAN" class="rede-img">
+                <p><strong>O que é?</strong> A menor e mais simples rede, usada para conectar seus dispositivos pessoais próximos a você.</p>
+                <p><strong>Imagine como:</strong> Seus dispositivos pessoais conversando entre si, como amigos em uma pequena reunião.</p>
                 
                 <div class="resposta">
-                    <p><span class="destaque">Usa:</span> Bluetooth ou cabo USB</p>
-                    <p><span class="destaque">Alcance:</span> Até 10 metros (um quarto ou sala)</p>
+                    <p><span class="destaque">Tecnologias usadas:</span> Bluetooth, USB, Zigbee, NFC</p>
+                    <p><span class="destaque">Alcance típico:</span> Até 10 metros (um quarto ou sala pequena)</p>
+                    <p><span class="destaque">Velocidade:</span> 1 Mbps a 24 Mbps (depende da tecnologia)</p>
+                </div>
+                
+                <div class="exemplos">
+                    <h4>Exemplos do dia a dia:</h4>
+                    <ul>
+                        <li>Conectar fones de ouvido sem fio ao celular</li>
+                        <li>Transferir fotos entre celulares com NFC</li>
+                        <li>Usar mouse e teclado sem fio no computador</li>
+                        <li>Conectar smartwatch ao smartphone</li>
+                    </ul>
                 </div>
             </div>
             
             <!-- Rede LAN -->
-            <div class="rede">
+            <div class="rede lan">
                 <h3>Rede LAN (Rede Local)</h3>
-                <img src="https://cdn-icons-png.flaticon.com/512/2285/2285531.png" alt="Rede de casa" width="150">
-                <p><strong>Para que serve?</strong> Conectar dispositivos em uma casa, escola ou escritório.</p>
-                <p><strong>Exemplos:</strong> Computadores na sala de aula, impressora compartilhada no trabalho.</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/2285/2285531.png" alt="Rede LAN" class="rede-img">
+                <p><strong>O que é?</strong> Rede que conecta dispositivos em uma área limitada como casa, escola ou escritório.</p>
+                <p><strong>Imagine como:</strong> Os computadores de uma empresa ou escola conversando entre si, como colegas de trabalho em um mesmo escritório.</p>
                 
                 <div class="resposta">
-                    <p><span class="destaque">Usa:</span> Cabos de rede ou Wi-Fi</p>
-                    <p><span class="destaque">Alcance:</span> Um prédio ou conjunto de salas</p>
+                    <p><span class="destaque">Tecnologias usadas:</span> Cabos Ethernet (CAT5e, CAT6), Wi-Fi</p>
+                    <p><span class="destaque">Alcance típico:</span> Um prédio ou conjunto de salas (até 100m)</p>
+                    <p><span class="destaque">Velocidade:</span> 100 Mbps a 10 Gbps (com cabos modernos)</p>
+                </div>
+                
+                <div class="exemplos">
+                    <h4>Exemplos do dia a dia:</h4>
+                    <ul>
+                        <li>Computadores em uma sala de aula compartilhando arquivos</li>
+                        <li>Impressora compartilhada em um escritório</li>
+                        <li>Vários dispositivos conectados ao mesmo roteador em casa</li>
+                        <li>Jogos em rede local entre computadores</li>
+                    </ul>
                 </div>
             </div>
             
             <!-- Rede WLAN -->
-            <div class="rede">
+            <div class="rede wlan">
                 <h3>Rede WLAN (Wi-Fi)</h3>
-                <img src="https://cdn-icons-png.flaticon.com/512/2489/2489183.png" alt="Wi-Fi" width="150">
-                <p><strong>Para que serve?</strong> Acesso à internet sem usar cabos.</p>
-                <p><strong>Exemplos:</strong> Internet em casa, café com Wi-Fi gratuito.</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/2489/2489183.png" alt="Rede WLAN" class="rede-img">
+                <p><strong>O que é?</strong> Versão sem fio da LAN, permitindo conexão à internet e entre dispositivos sem cabos.</p>
+                <p><strong>Imagine como:</strong> Uma LAN sem fios, onde os dispositivos se comunicam por "ondas invisíveis" como walkie-talkies digitais.</p>
                 
                 <div class="resposta">
-                    <p><span class="destaque">Vantagem:</span> Você pode se mover com o celular/notebook</p>
-                    <p><span class="destaque">Alcance:</span> 30-100 metros (depende do roteador)</p>
+                    <p><span class="destaque">Tecnologias usadas:</span> Wi-Fi (802.11ac, 802.11ax)</p>
+                    <p><span class="destaque">Alcance típico:</span> 30-100 metros (depende do roteador e obstáculos)</p>
+                    <p><span class="destaque">Velocidade:</span> 50 Mbps a 1 Gbps (Wi-Fi 6)</p>
+                </div>
+                
+                <div class="exemplos">
+                    <h4>Exemplos do dia a dia:</h4>
+                    <ul>
+                        <li>Internet sem fio em casa</li>
+                        <li>Wi-Fi gratuito em cafés e restaurantes</li>
+                        <li>Conexão entre celular e smart TV para transmitir vídeos</li>
+                        <li>Tablets conectados à internet na escola</li>
+                    </ul>
                 </div>
             </div>
             
             <!-- Rede MAN -->
-            <div class="rede">
+            <div class="rede man">
                 <h3>Rede MAN (Rede Metropolitana)</h3>
-                <img src="https://cdn-icons-png.flaticon.com/512/2885/2885547.png" alt="Cidade" width="150">
-                <p><strong>Para que serve?</strong> Conectar redes de uma cidade inteira.</p>
-                <p><strong>Exemplos:</strong> Redes de universidades com vários campus, provedores de internet local.</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/2885/2885547.png" alt="Rede MAN" class="rede-img">
+                <p><strong>O que é?</strong> Rede que cobre uma cidade ou região metropolitana, conectando várias LANs.</p>
+                <p><strong>Imagine como:</strong> O sistema de ônibus ou metrô de uma cidade, conectando diferentes bairros e distritos.</p>
                 
                 <div class="resposta">
-                    <p><span class="destaque">Usa:</span> Fibra óptica ou rádio</p>
-                    <p><span class="destaque">Alcance:</span> Até 50km (uma cidade grande)</p>
+                    <p><span class="destaque">Tecnologias usadas:</span> Fibra óptica, rádio, WiMAX</p>
+                    <p><span class="destaque">Alcance típico:</span> Até 50km (uma cidade grande)</p>
+                    <p><span class="destaque">Velocidade:</span> 10 Mbps a 10 Gbps</p>
+                </div>
+                
+                <div class="exemplos">
+                    <h4>Exemplos do dia a dia:</h4>
+                    <ul>
+                        <li>Redes de universidades com vários campus</li>
+                        <li>Provedores de internet local (ISPs)</li>
+                        <li>Sistemas de vigilância municipal conectados</li>
+                        <li>Redes de bibliotecas públicas de uma cidade</li>
+                    </ul>
                 </div>
             </div>
             
-            <!-- Ethernet -->
-            <div class="rede">
-                <h3>Ethernet</h3>
-                <img src="https://cdn-icons-png.flaticon.com/512/2885/2885509.png" alt="Cabo de rede" width="150">
-                <p><strong>Para que serve?</strong> Conexão por cabo mais rápida e estável que Wi-Fi.</p>
-                <p><strong>Exemplos:</strong> Computadores fixos em empresas, consoles de videogame.</p>
+            <!-- Rede WAN -->
+            <div class="rede wan">
+                <h3>Rede WAN (Rede de Longa Distância)</h3>
+                <img src="https://cdn-icons-png.flaticon.com/512/2885/2885578.png" alt="Rede WAN" class="rede-img">
+                <p><strong>O que é?</strong> Rede que cobre grandes distâncias, como entre cidades, países ou continentes.</p>
+                <p><strong>Imagine como:</strong> O sistema de aviação comercial, conectando cidades e países em todo o mundo.</p>
                 
                 <div class="resposta">
-                    <p><span class="destaque">Vantagem:</span> Mais rápido e sem interferência</p>
-                    <p><span class="destaque">Desvantagem:</span> Precisa de cabos</p>
+                    <p><span class="destaque">Tecnologias usadas:</span> Fibra óptica submarina, satélites, links de rádio</p>
+                    <p><span class="destaque">Alcance típico:</span> Ilimitado (pode ser global)</p>
+                    <p><span class="destaque">Velocidade:</span> 1 Mbps a 100 Gbps (em backbone)</p>
+                </div>
+                
+                <div class="exemplos">
+                    <h4>Exemplos do dia a dia:</h4>
+                    <ul>
+                        <li>A internet como um todo</li>
+                        <li>Conexão entre matriz e filiais de multinacionais</li>
+                        <li>Comunicação entre data centers em diferentes países</li>
+                        <li>Sistemas bancários internacionais</li>
+                    </ul>
                 </div>
             </div>
             
-            <a href="inicio.html" class="back-button">Voltar ao Menu</a>
+            <!-- Rede SAN -->
+            <div class="rede san">
+                <h3>Rede SAN (Rede de Armazenamento)</h3>
+                <img src="https://cdn-icons-png.flaticon.com/512/2885/2885524.png" alt="Rede SAN" class="rede-img">
+                <p><strong>O que é?</strong> Rede especializada em conectar servidores a sistemas de armazenamento em alta velocidade.</p>
+                <p><strong>Imagine como:</strong> Um grande armazém central onde várias lojas (servidores) buscam e guardam seus produtos (dados) de forma rápida e organizada.</p>
+                
+                <div class="resposta">
+                    <p><span class="destaque">Tecnologias usadas:</span> Fibre Channel, iSCSI, FCoE</p>
+                    <p><span class="destaque">Alcance típico:</span> Até 10km (normalmente dentro de um data center)</p>
+                    <p><span class="destaque">Velocidade:</span> 8 Gbps a 128 Gbps</p>
+                </div>
+                
+                <div class="exemplos">
+                    <h4>Exemplos de uso:</h4>
+                    <ul>
+                        <li>Data centers de grandes empresas</li>
+                        <li>Serviços de nuvem como Google Drive e Dropbox (nos bastidores)</li>
+                        <li>Hospitais com grande armazenamento de imagens médicas</li>
+                        <li>Bancos com grande volume de transações</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Rede VPN -->
+            <div class="rede vpn">
+                <h3>Rede VPN (Rede Privada Virtual)</h3>
+                <img src="https://cdn-icons-png.flaticon.com/512/2885/2885518.png" alt="Rede VPN" class="rede-img">
+                <p><strong>O que é?</strong> Rede que cria um "túnel seguro" através da internet para conectar dispositivos como se estivessem na mesma rede local.</p>
+                <p><strong>Imagine como:</strong> Um túnel secreto que te permite acessar sua rede doméstica ou corporativa de qualquer lugar do mundo com segurança.</p>
+                
+                <div class="resposta">
+                    <p><span class="destaque">Tecnologias usadas:</span> IPsec, SSL/TLS, OpenVPN, WireGuard</p>
+                    <p><span class="destaque">Alcance típico:</span> Qualquer lugar com internet</p>
+                    <p><span class="destaque">Velocidade:</span> Depende da conexão de internet</p>
+                </div>
+                
+                <div class="exemplos">
+                    <h4>Exemplos do dia a dia:</h4>
+                    <ul>
+                        <li>Trabalhar remotamente acessando arquivos da empresa</li>
+                        <li>Acessar conteúdo restrito por região (como streaming)</li>
+                        <li>Proteger conexão em redes públicas (aeroportos, cafés)</li>
+                        <li>Jogar online com amigos como se estivessem na mesma LAN</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Rede CAN -->
+            <div class="rede can">
+                <h3>Rede CAN (Rede de Área de Campus)</h3>
+                <img src="https://cdn-icons-png.flaticon.com/512/2885/2885538.png" alt="Rede CAN" class="rede-img">
+                <p><strong>O que é?</strong> Rede que conecta várias LANs dentro de uma área como um campus universitário ou complexo empresarial.</p>
+                <p><strong>Imagine como:</strong> O sistema de transporte interno de uma grande universidade, conectando diferentes faculdades e departamentos.</p>
+                
+                <div class="resposta">
+                    <p><span class="destaque">Tecnologias usadas:</span> Ethernet, fibra óptica, wireless</p>
+                    <p><span class="destaque">Alcance típico:</span> 1km a 5km (um grande campus)</p>
+                    <p><span class="destaque">Velocidade:</span> 100 Mbps a 10 Gbps</p>
+                </div>
+                
+                <div class="exemplos">
+                    <h4>Exemplos do dia a dia:</h4>
+                    <ul>
+                        <li>Universidades com vários prédios interligados</li>
+                        <li>Grandes complexos hospitalares</li>
+                        <li>Parques tecnológicos ou industriais</li>
+                        <li>Bases militares ou governamentais</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <button class="back-button" onclick="location.href='inicio.html'">Voltar ao Menu</button>
         </div>
         
         <!-- Conteúdo de Programação com os códigos de login e administrativo -->
         <div id="programacao-content" class="content">
-            <h2>Projeto de Programação Web</h2>
-            <p>Aqui estão os códigos para o projeto do curso técnico:</p>
+            <h2>Recursos de Programação Web</h2>
             
             <!-- Box do Código de Login -->
             <div class="code-box">
                 <div class="code-header">
-                    <div class="code-title">Tela de Login</div>
-                    <button class="copy-btn" onclick="copyCode('login-code', 'login-success')">Copiar Código</button>
+                    <div class="code-title">Tela de Login </div>
+                    <button class="copy-btn" onclick="copyCode('login-code', 'login-success')">Copiar</button>
                 </div>
                 <div class="code-content" id="login-code">
 &lt;!DOCTYPE html&gt;
@@ -289,60 +593,149 @@
 &lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Login&lt;/title&gt;
+    &lt;title&gt;Login Moderno&lt;/title&gt;
     &lt;style&gt;
+        :root {
+            --primary: #6e48aa;
+            --secondary: #9d50bb;
+            --dark: #2c3e50;
+            --light: #f5f7fa;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #444444;
-            margin: 0;
+            min-height: 100vh;
+            padding: 20px;
         }
+        
         .login-container {
             background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
             text-align: center;
+            animation: fadeIn 0.5s ease;
         }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         .login-container h2 {
+            margin-bottom: 30px;
+            color: var(--dark);
+            font-size: 1.8rem;
+        }
+        
+        .input-group {
             margin-bottom: 20px;
-            color: #333;
+            text-align: left;
         }
-        .login-container input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 600;
         }
-        .login-container button {
+        
+        .input-group input {
             width: 100%;
-            padding: 10px;
-            background-color: #532d82;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .input-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(110, 72, 170, 0.2);
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
         }
-        .login-container button:hover {
-            background-color: #482865;
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(110, 72, 170, 0.4);
+        }
+        
+        .login-btn:active {
+            transform: translateY(0);
+        }
+        
+        .forgot-password {
+            display: block;
+            margin-top: 15px;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .forgot-password:hover {
+            color: var(--primary);
+        }
+        
+        .signup-link {
+            margin-top: 25px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .signup-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
         }
     &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
     &lt;div class="login-container"&gt;
-        &lt;h2&gt;Login&lt;/h2&gt;
+        &lt;h2&gt;Faça seu Login&lt;/h2&gt;
         &lt;form action="#" method="POST"&gt;
-            &lt;input type="text" name="username" placeholder="Usuário" required&gt;
-            &lt;input type="password" name="password" placeholder="Senha" required&gt;
-            &lt;button type="submit"&gt;Entrar&lt;/button&gt;
+            &lt;div class="input-group"&gt;
+                &lt;label for="username"&gt;Usuário&lt;/label&gt;
+                &lt;input type="text" id="username" name="username" placeholder="Digite seu usuário" required&gt;
+            &lt;/div&gt;
+            
+            &lt;div class="input-group"&gt;
+                &lt;label for="password"&gt;Senha&lt;/label&gt;
+                &lt;input type="password" id="password" name="password" placeholder="Digite sua senha" required&gt;
+            &lt;/div&gt;
+            
+            &lt;button type="submit" class="login-btn"&gt;Entrar&lt;/button&gt;
+            
+            &lt;a href="#" class="forgot-password"&gt;Esqueceu sua senha?&lt;/a&gt;
         &lt;/form&gt;
+        
+        &lt;p class="signup-link"&gt;Não tem uma conta? &lt;a href="#"&gt;Cadastre-se&lt;/a&gt;&lt;/p&gt;
     &lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -353,8 +746,8 @@
             <!-- Box do Código Administrativo -->
             <div class="code-box">
                 <div class="code-header">
-                    <div class="code-title">Tela Administrativa</div>
-                    <button class="copy-btn" onclick="copyCode('admin-code', 'admin-success')">Copiar Código</button>
+                    <div class="code-title">Painel Administrativo</div>
+                    <button class="copy-btn" onclick="copyCode('admin-code', 'admin-success')">Copiar</button>
                 </div>
                 <div class="code-content" id="admin-code">
 &lt;!DOCTYPE html&gt;
@@ -364,84 +757,460 @@
     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
     &lt;title&gt;Painel Administrativo&lt;/title&gt;
     &lt;style&gt;
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            height: 100vh;
-            background-color: #444444;
+        :root {
+            --primary: #6e48aa;
+            --secondary: #9d50bb;
+            --dark: #2c3e50;
+            --light: #f5f7fa;
+            --danger: #e74c3c;
+            --success: #2ecc71;
+            --warning: #f39c12;
+        }
+        
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
         }
+        
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f0f2f5;
+            color: var(--dark);
+        }
+        
+        /* Sidebar */
         .sidebar {
-            width: 250px;
-            background: #532d82;
-            padding: 20px;
+            width: 280px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
+            padding: 30px 0;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-header {
+            padding: 0 25px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 25px;
+        }
+        
+        .sidebar-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-header p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        .user-info {
             display: flex;
-            flex-direction: column;
             align-items: center;
+            padding: 0 25px 25px;
+            margin-bottom: 20px;
         }
-        .sidebar h2 {
-            margin-bottom: 30px;
-        }
-        .menu {
+        
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 100%;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
         }
-        .menu a {
-            display: block;
-            padding: 12px;
-            background-color: #633595;
+        
+        .user-name {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        
+        .user-role {
+            opacity: 0.8;
+            font-size: 0.8rem;
+        }
+        
+        .menu {
+            padding: 0 15px;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            margin-bottom: 8px;
+            border-radius: 8px;
             color: white;
             text-decoration: none;
-            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .menu-item.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+        }
+        
+        .menu-item i {
+            margin-right: 12px;
+            font-size: 1.1rem;
+            width: 20px;
             text-align: center;
-            transition: background-color 0.3s;
         }
-        .menu a:hover {
-            background-color: #482065;
-        }
+        
         .logout-btn {
-            margin-top: 20px;
-            background-color: #e53935;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: calc(100% - 50px);
+            margin: 30px 25px 0;
+            padding: 12px;
+            background-color: var(--danger);
             color: white;
             border: none;
-            padding: 10px;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            width: 100%;
-            text-align: center;
-            transition: background-color 0.3s;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
+        
         .logout-btn:hover {
-            background-color: #c62828;
+            background-color: #c0392b;
+            transform: translateY(-2px);
         }
-        .content {
-            flex-grow: 1;
-            padding: 20px;
-            background: white;
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .page-title h1 {
+            font-size: 1.8rem;
+            color: var(--dark);
+        }
+        
+        .page-title p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .notification-btn, .search-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: white;
+            border: none;
+            margin-left: 15px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+        
+        .notification-btn:hover, .search-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background-color: white;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin: 20px;
-            text-align: center;
+            padding: 20px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .card-title {
+            font-size: 1rem;
+            color: #666;
+        }
+        
+        .card-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .card-footer {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        
+        .card-footer.success {
+            color: var(--success);
+        }
+        
+        .card-footer.danger {
+            color: var(--danger);
+        }
+        
+        .card-footer i {
+            margin-right: 5px;
+        }
+        
+        /* Recent Activity */
+        .recent-activity {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .activity-header h2 {
+            font-size: 1.3rem;
+        }
+        
+        .view-all {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .activity-item {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(110, 72, 170, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--primary);
+        }
+        
+        .activity-info {
+            flex: 1;
+        }
+        
+        .activity-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .activity-time {
+            color: #666;
+            font-size: 0.8rem;
         }
     &lt;/style&gt;
+    &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"&gt;
 &lt;/head&gt;
 &lt;body&gt;
     &lt;div class="sidebar"&gt;
-        &lt;h2&gt;Admin&lt;/h2&gt;
-        &lt;p&gt;Bem-vindo, &lt;strong&gt;Usuário&lt;/strong&gt;&lt;/p&gt;
-        &lt;div class="menu"&gt;
-            &lt;a href="#"&gt;Opção 1&lt;/a&gt;
-            &lt;a href="#"&gt;Opção 2&lt;/a&gt;
-            &lt;a href="#"&gt;Opção 3&lt;/a&gt;
-            &lt;a href="#"&gt;Opção 4&lt;/a&gt;
+        &lt;div class="sidebar-header"&gt;
+            &lt;h2&gt;Painel Admin&lt;/h2&gt;
+            &lt;p&gt;Controle total do sistema&lt;/p&gt;
         &lt;/div&gt;
-        &lt;button class="logout-btn"&gt;Sair&lt;/button&gt;
+        
+        &lt;div class="user-info"&gt;
+            &lt;div class="user-avatar"&gt;AD&lt;/div&gt;
+            &lt;div&gt;
+                &lt;div class="user-name"&gt;Admin User&lt;/div&gt;
+                &lt;div class="user-role"&gt;Administrador&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;div class="menu"&gt;
+            &lt;a href="#" class="menu-item active"&gt;
+                &lt;i class="fas fa-tachometer-alt"&gt;&lt;/i&gt; Dashboard
+            &lt;/a&gt;
+            &lt;a href="#" class="menu-item"&gt;
+                &lt;i class="fas fa-users"&gt;&lt;/i&gt; Usuários
+            &lt;/a&gt;
+            &lt;a href="#" class="menu-item"&gt;
+                &lt;i class="fas fa-box"&gt;&lt;/i&gt; Produtos
+            &lt;/a&gt;
+            &lt;a href="#" class="menu-item"&gt;
+                &lt;i class="fas fa-chart-line"&gt;&lt;/i&gt; Relatórios
+            &lt;/a&gt;
+            &lt;a href="#" class="menu-item"&gt;
+                &lt;i class="fas fa-cog"&gt;&lt;/i&gt; Configurações
+            &lt;/a&gt;
+        &lt;/div&gt;
+        
+        &lt;button class="logout-btn"&gt;
+            &lt;i class="fas fa-sign-out-alt"&gt;&lt;/i&gt; Sair
+        &lt;/button&gt;
     &lt;/div&gt;
-    &lt;div class="content"&gt;
-        &lt;h2&gt;Selecione uma opção no menu&lt;/h2&gt;
+    
+    &lt;div class="main-content"&gt;
+        &lt;div class="header"&gt;
+            &lt;div class="page-title"&gt;
+                &lt;h1&gt;Dashboard&lt;/h1&gt;
+                &lt;p&gt;Bem-vindo ao painel de controle&lt;/p&gt;
+            &lt;/div&gt;
+            
+            &lt;div class="user-actions"&gt;
+                &lt;button class="search-btn"&gt;
+                    &lt;i class="fas fa-search"&gt;&lt;/i&gt;
+                &lt;/button&gt;
+                &lt;button class="notification-btn"&gt;
+                    &lt;i class="fas fa-bell"&gt;&lt;/i&gt;
+                &lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;div class="cards"&gt;
+            &lt;div class="card"&gt;
+                &lt;div class="card-header"&gt;
+                    &lt;div class="card-title"&gt;Usuários&lt;/div&gt;
+                    &lt;i class="fas fa-users"&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;div class="card-value"&gt;1,254&lt;/div&gt;
+                &lt;div class="card-footer success"&gt;
+                    &lt;i class="fas fa-arrow-up"&gt;&lt;/i&gt; 12% desde o último mês
+                &lt;/div&gt;
+            &lt;/div&gt;
+            
+            &lt;div class="card"&gt;
+                &lt;div class="card-header"&gt;
+                    &lt;div class="card-title"&gt;Vendas&lt;/div&gt;
+                    &lt;i class="fas fa-shopping-cart"&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;div class="card-value"&gt;$8,420&lt;/div&gt;
+                &lt;div class="card-footer success"&gt;
+                    &lt;i class="fas fa-arrow-up"&gt;&lt;/i&gt; 19% desde o último mês
+                &lt;/div&gt;
+            &lt;/div&gt;
+            
+            &lt;div class="card"&gt;
+                &lt;div class="card-header"&gt;
+                    &lt;div class="card-title"&gt;Pedidos&lt;/div&gt;
+                    &lt;i class="fas fa-clipboard-list"&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;div class="card-value"&gt;284&lt;/div&gt;
+                &lt;div class="card-footer danger"&gt;
+                    &lt;i class="fas fa-arrow-down"&gt;&lt;/i&gt; 5% desde o último mês
+                &lt;/div&gt;
+            &lt;/div&gt;
+            
+            &lt;div class="card"&gt;
+                &lt;div class="card-header"&gt;
+                    &lt;div class="card-title"&gt;Taxa de Conversão&lt;/div&gt;
+                    &lt;i class="fas fa-percentage"&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;div class="card-value"&gt;3.2%&lt;/div&gt;
+                &lt;div class="card-footer success"&gt;
+                    &lt;i class="fas fa-arrow-up"&gt;&lt;/i&gt; 1% desde o último mês
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;div class="recent-activity"&gt;
+            &lt;div class="activity-header"&gt;
+                &lt;h2&gt;Atividade Recente&lt;/h2&gt;
+                &lt;a href="#" class="view-all"&gt;Ver tudo&lt;/a&gt;
+            &lt;/div&gt;
+            
+            &lt;div class="activity-item"&gt;
+                &lt;div class="activity-icon"&gt;
+                    &lt;i class="fas fa-user-plus"&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;div class="activity-info"&gt;
+                    &lt;div class="activity-title"&gt;Novo usuário registrado&lt;/div&gt;
+                    &lt;div class="activity-time"&gt;2 minutos atrás&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            
+            &lt;div class="activity-item"&gt;
+                &lt;div class="activity-icon"&gt;
+                    &lt;i class="fas fa-shopping-cart"&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;div class="activity-info"&gt;
+                    &lt;div class="activity-title"&gt;Novo pedido #12345&lt;/div&gt;
+                    &lt;div class="activity-time"&gt;15 minutos atrás&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            
+            &lt;div class="activity-item"&gt;
+                &lt;div class="activity-icon"&gt;
+                    &lt;i class="fas fa-comment"&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;div class="activity-info"&gt;
+                    &lt;div class="activity-title"&gt;Novo comentário no post #3&lt;/div&gt;
+                    &lt;div class="activity-time"&gt;1 hora atrás&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            
+            &lt;div class="activity-item"&gt;
+                &lt;div class="activity-icon"&gt;
+                    &lt;i class="fas fa-box-open"&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;div class="activity-info"&gt;
+                    &lt;div class="activity-title"&gt;Novo produto adicionado&lt;/div&gt;
+                    &lt;div class="activity-time"&gt;3 horas atrás&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
     &lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -449,7 +1218,7 @@
                 <div class="success-message" id="admin-success">Código copiado com sucesso!</div>
             </div>
             
-            <a href="inicio.html" class="back-button">Voltar ao Menu</a>
+            <button class="back-button" onclick="location.href='inicio.html'">Voltar ao Menu</button>
         </div>
     </div>
 
@@ -484,9 +1253,10 @@
             try {
                 document.execCommand('copy');
                 // Mostrar mensagem de sucesso
-                document.getElementById(successId).style.display = 'block';
+                const successMessage = document.getElementById(successId);
+                successMessage.style.display = 'block';
                 setTimeout(() => {
-                    document.getElementById(successId).style.display = 'none';
+                    successMessage.style.display = 'none';
                 }, 2000);
             } catch(err) {
                 console.error('Falha ao copiar código: ', err);
