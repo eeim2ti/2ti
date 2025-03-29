@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu de Estudos</title>
+    <style>
+        /* Estilos Gerais */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Menu */
+        .menu {
+            display: flex;
+            background-color: #2c3e50;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .menu-item {
+            padding: 15px 25px;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+            flex: 1;
+            transition: background-color 0.3s;
+        }
+        
+        .menu-item:hover {
+            background-color: #3498db;
+        }
+        
+        .menu-item.active {
+            background-color: #2980b9;
+            font-weight: bold;
+        }
+        
+        /* Conteúdos */
+        .content {
+            display: none;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content.active {
+            display: block;
+        }
+        
+        /* Estilos para o conteúdo de Redes */
+        .rede {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        
+        .rede img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px auto;
+            border: 1px solid #ccc;
+        }
+        
+        .resposta {
+            background-color: #e8f4fc;
+            border-left: 4px solid #3498db;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .destaque {
+            background-color: #fffacd;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        
+        /* Estilos para as boxes de código */
+        .code-box {
+            background-color: #282c34;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .code-header {
+            background-color: #1e2227;
+            color: white;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .code-title {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .copy-btn {
+            background-color: #61afef;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.2s;
+        }
+        
+        .copy-btn:hover {
+            background-color: #528bff;
+        }
+        
+        .code-content {
+            padding: 15px;
+            color: #abb2bf;
+            font-family: 'Consolas', 'Monaco', monospace;
+            white-space: pre;
+            overflow-x: auto;
+            line-height: 1.5;
+            tab-size: 4;
+        }
+        
+        .success-message {
+            color: #98c379;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        /* Botão Voltar */
+        .back-button {
+            display: block;
+            width: 200px;
+            margin: 30px auto 0;
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .back-button:hover {
+            background-color: #3498db;
+        }
+        
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .menu {
+                flex-direction: column;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .rede {
+                padding: 15px;
+            }
+            
+            .back-button {
+                width: 100%;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Menu de Estudos</h1>
+        
+        <!-- Menu Principal -->
+        <div class="menu">
+            <div class="menu-item active" onclick="showContent('redes')">Redes - Ossian</div>
+            <div class="menu-item" onclick="showContent('programacao')">Programação - Marcelo</div>
+        </div>
+        
+        <!-- Conteúdo de Redes -->
+        <div id="redes-content" class="content active">
+            <h2>Tipos de Redes de Computadores</h2>
+            
+            <!-- Rede PAN -->
+            <div class="rede">
+                <h3>Rede PAN (Rede Pessoal)</h3>
+                <img src="https://simpleicon.com/wp-content/uploads/bluetooth.png" alt="Bluetooth" width="150">
+                <p><strong>Para que serve?</strong> Conectar seus dispositivos pessoais próximos a você.</p>
+                <p><strong>Exemplos:</strong> Fone de ouvido sem fio, mouse Bluetooth, transferência de fotos entre celulares.</p>
+                
+                <div class="resposta">
+                    <p><span class="destaque">Usa:</span> Bluetooth ou cabo USB</p>
+                    <p><span class="destaque">Alcance:</span> Até 10 metros (um quarto ou sala)</p>
+                </div>
+            </div>
+            
+            <!-- Rede LAN -->
+            <div class="rede">
+                <h3>Rede LAN (Rede Local)</h3>
+                <img src="https://cdn-icons-png.flaticon.com/512/2285/2285531.png" alt="Rede de casa" width="150">
+                <p><strong>Para que serve?</strong> Conectar dispositivos em uma casa, escola ou escritório.</p>
+                <p><strong>Exemplos:</strong> Computadores na sala de aula, impressora compartilhada no trabalho.</p>
+                
+                <div class="resposta">
+                    <p><span class="destaque">Usa:</span> Cabos de rede ou Wi-Fi</p>
+                    <p><span class="destaque">Alcance:</span> Um prédio ou conjunto de salas</p>
+                </div>
+            </div>
+            
+            <!-- Rede WLAN -->
+            <div class="rede">
+                <h3>Rede WLAN (Wi-Fi)</h3>
+                <img src="https://cdn-icons-png.flaticon.com/512/2489/2489183.png" alt="Wi-Fi" width="150">
+                <p><strong>Para que serve?</strong> Acesso à internet sem usar cabos.</p>
+                <p><strong>Exemplos:</strong> Internet em casa, café com Wi-Fi gratuito.</p>
+                
+                <div class="resposta">
+                    <p><span class="destaque">Vantagem:</span> Você pode se mover com o celular/notebook</p>
+                    <p><span class="destaque">Alcance:</span> 30-100 metros (depende do roteador)</p>
+                </div>
+            </div>
+            
+            <!-- Rede MAN -->
+            <div class="rede">
+                <h3>Rede MAN (Rede Metropolitana)</h3>
+                <img src="https://cdn-icons-png.flaticon.com/512/2885/2885547.png" alt="Cidade" width="150">
+                <p><strong>Para que serve?</strong> Conectar redes de uma cidade inteira.</p>
+                <p><strong>Exemplos:</strong> Redes de universidades com vários campus, provedores de internet local.</p>
+                
+                <div class="resposta">
+                    <p><span class="destaque">Usa:</span> Fibra óptica ou rádio</p>
+                    <p><span class="destaque">Alcance:</span> Até 50km (uma cidade grande)</p>
+                </div>
+            </div>
+            
+            <!-- Ethernet -->
+            <div class="rede">
+                <h3>Ethernet</h3>
+                <img src="https://cdn-icons-png.flaticon.com/512/2885/2885509.png" alt="Cabo de rede" width="150">
+                <p><strong>Para que serve?</strong> Conexão por cabo mais rápida e estável que Wi-Fi.</p>
+                <p><strong>Exemplos:</strong> Computadores fixos em empresas, consoles de videogame.</p>
+                
+                <div class="resposta">
+                    <p><span class="destaque">Vantagem:</span> Mais rápido e sem interferência</p>
+                    <p><span class="destaque">Desvantagem:</span> Precisa de cabos</p>
+                </div>
+            </div>
+            
+            <a href="inicio.html" class="back-button">Voltar ao Menu</a>
+        </div>
+        
+        <!-- Conteúdo de Programação com os códigos de login e administrativo -->
+        <div id="programacao-content" class="content">
+            <h2>Projeto de Programação Web</h2>
+            <p>Aqui estão os códigos para o projeto do curso técnico:</p>
+            
+            <!-- Box do Código de Login -->
+            <div class="code-box">
+                <div class="code-header">
+                    <div class="code-title">Tela de Login</div>
+                    <button class="copy-btn" onclick="copyCode('login-code', 'login-success')">Copiar Código</button>
+                </div>
+                <div class="code-content" id="login-code">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-br"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Login&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #444444;
+            margin: 0;
+        }
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #532d82;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .login-container button:hover {
+            background-color: #482865;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="login-container"&gt;
+        &lt;h2&gt;Login&lt;/h2&gt;
+        &lt;form action="#" method="POST"&gt;
+            &lt;input type="text" name="username" placeholder="Usuário" required&gt;
+            &lt;input type="password" name="password" placeholder="Senha" required&gt;
+            &lt;button type="submit"&gt;Entrar&lt;/button&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                </div>
+                <div class="success-message" id="login-success">Código copiado com sucesso!</div>
+            </div>
+
+            <!-- Box do Código Administrativo -->
+            <div class="code-box">
+                <div class="code-header">
+                    <div class="code-title">Tela Administrativa</div>
+                    <button class="copy-btn" onclick="copyCode('admin-code', 'admin-success')">Copiar Código</button>
+                </div>
+                <div class="code-content" id="admin-code">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-br"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Painel Administrativo&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            background-color: #444444;
+            margin: 0;
+        }
+        .sidebar {
+            width: 250px;
+            background: #532d82;
+            padding: 20px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .sidebar h2 {
+            margin-bottom: 30px;
+        }
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+        .menu a {
+            display: block;
+            padding: 12px;
+            background-color: #633595;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .menu a:hover {
+            background-color: #482065;
+        }
+        .logout-btn {
+            margin-top: 20px;
+            background-color: #e53935;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .logout-btn:hover {
+            background-color: #c62828;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            text-align: center;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="sidebar"&gt;
+        &lt;h2&gt;Admin&lt;/h2&gt;
+        &lt;p&gt;Bem-vindo, &lt;strong&gt;Usuário&lt;/strong&gt;&lt;/p&gt;
+        &lt;div class="menu"&gt;
+            &lt;a href="#"&gt;Opção 1&lt;/a&gt;
+            &lt;a href="#"&gt;Opção 2&lt;/a&gt;
+            &lt;a href="#"&gt;Opção 3&lt;/a&gt;
+            &lt;a href="#"&gt;Opção 4&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;button class="logout-btn"&gt;Sair&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="content"&gt;
+        &lt;h2&gt;Selecione uma opção no menu&lt;/h2&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                </div>
+                <div class="success-message" id="admin-success">Código copiado com sucesso!</div>
+            </div>
+            
+            <a href="inicio.html" class="back-button">Voltar ao Menu</a>
+        </div>
+    </div>
+
+    <script>
+        // Função para alternar entre conteúdos
+        function showContent(contentId) {
+            // Esconde todos os conteúdos
+            document.querySelectorAll('.content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active de todos os itens do menu
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Mostra o conteúdo selecionado
+            document.getElementById(contentId + '-content').classList.add('active');
+            
+            // Ativa o item do menu selecionado
+            event.currentTarget.classList.add('active');
+        }
+
+        // Função para copiar código
+        function copyCode(codeId, successId) {
+            const codeElement = document.getElementById(codeId);
+            const range = document.createRange();
+            range.selectNode(codeElement);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            
+            try {
+                document.execCommand('copy');
+                // Mostrar mensagem de sucesso
+                document.getElementById(successId).style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById(successId).style.display = 'none';
+                }, 2000);
+            } catch(err) {
+                console.error('Falha ao copiar código: ', err);
+            }
+            
+            window.getSelection().removeAllRanges();
+        }
+    </script>
+</body>
+</html>

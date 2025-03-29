@@ -1,0 +1,11 @@
+/* Estilos específicos para abas */
+.tab-content {
+    display: none;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 0 0 5px 5px;
+}
+
+.tab-content.active {
+    display: block;
+}

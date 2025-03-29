@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barra de Pesquisa com Menu</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tabs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Fluxo_escudo.png" alt="Logo">
+        </div>
+        <button id="menuToggle" aria-label="Abrir menu">
+            <i class="fas fa-ellipsis-v"></i>
+        </button>
+    </header>
+
+    <!-- Menu de Navegação -->
+    <nav class="main-menu" id="mainMenu">
+        <ul>
+            <li><a href="posts.html" class="active">Nossas Fotos</a></li>
+            <li><a href="informatica.html">informatica</a></li>
+            <li><a href="ia.html">IA & Disfarce IA</a></li>
+        </ul>
+    </nav>
+    
+    <div class="search-container">
+        <h1>Pesquisar no Site</h1>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Digite sua pesquisa...">
+            <button id="searchButton">Buscar</button>
+        </div>
+        <div id="searchResults"></div>
+    </div>
+    
+    <div id="siteContent">
+        <!-- Conteúdo será carregado dinamicamente ou redirecionado -->
+    </div>
+    
+    <script src="js/main.js"></script>
+    <script src="js/tabs.js"></script>
+</body>
+</html>

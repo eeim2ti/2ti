@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA e IA Disfarçada</title>
+    <style>
+        /* Estilos Gerais */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Menu */
+        .menu {
+            display: flex;
+            background-color: #2c3e50;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .menu-item {
+            padding: 15px 25px;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+            flex: 1;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .menu-item:hover {
+            background-color: #3498db;
+            transform: translateY(-2px);
+        }
+        
+        .menu-item.active {
+            background-color: #2980b9;
+            font-weight: bold;
+            box-shadow: inset 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* Conteúdos */
+        .content {
+            display: none;
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .content.active {
+            display: block;
+        }
+        
+        /* Cards de IA */
+        .ia-card {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .ia-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .ia-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin: 15px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .ia-card h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        /* Destaques */
+        .destaque {
+            background-color: #e3f2fd;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .numero {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        /* Botão Voltar */
+        .back-button {
+            display: block;
+            width: 200px;
+            margin: 30px auto 0;
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .back-button:hover {
+            background-color: #3498db;
+        }
+        
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .menu {
+                flex-direction: column;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .ia-card {
+                padding: 15px;
+            }
+            
+            .back-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+  
+    <div class="container">
+        <h1 style="text-align: center; color: #2c3e50; margin-bottom: 30px;">IA</h1>
+        
+        <!-- Menu Principal -->
+        <div class="menu">
+            <div class="menu-item active" onclick="showContent('top-ia')">Top 5 IAs</div>
+            <div class="menu-item" onclick="showContent('ia-disfarce')">IA que Disfarça IA</div>
+        </div>
+        
+        <!-- Conteúdo: Top 5 IAs -->
+        <div id="top-ia-content" class="content active">
+            <h2 style="color: #2980b9; text-align: center;">Top 5 Inteligências Artificiais</h2>
+            
+            <!-- ChatGPT -->
+            <div class="ia-card">
+                <h3><span class="numero">1</span> ChatGPT (OpenAI)</h3>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/240px-ChatGPT_logo.svg.png" alt="ChatGPT">
+                <p><strong>O que faz:</strong> Conversa como humano, escreve textos, explica conceitos, gera ideias e códigos.</p>
+                <p><strong>Uso real:</strong> Assistente virtual, tutor de estudos, gerador de conteúdo.</p>
+                
+                <div class="destaque">
+                    <p><strong>🤖 Curiosidade:</strong> Já passou em exames de Direito e Medicina, mas ainda comete erros básicos.</p>
+                </div>
+            </div>
+            
+            <!-- MidJourney -->
+            <div class="ia-card">
+                <h3><span class="numero">2</span> MidJourney</h3>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Midjourney_Emblem.png/240px-Midjourney_Emblem.png" alt="MidJourney">
+                <p><strong>O que faz:</strong> Cria imagens impressionantes a partir de descrições textuais.</p>
+                <p><strong>Uso real:</strong> Arte digital, conceitos para games, ilustrações para livros.</p>
+                
+                <div class="destaque">
+                    <p><strong>🎨 Curiosidade:</strong> Suas imagens já foram usadas em capas de revistas famosas sem que percebessem que era IA.</p>
+                </div>
+            </div>
+            
+            <!-- GitHub Copilot -->
+            <div class="ia-card">
+                <h3><span class="numero">3</span> GitHub Copilot</h3>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Copilot_logo.svg/240px-GitHub_Copilot_logo.svg.png" alt="GitHub Copilot">
+                <p><strong>O que faz:</strong> Sugere códigos e completa linhas automaticamente enquanto você programa.</p>
+                <p><strong>Uso real:</strong> Aumenta produtividade de desenvolvedores, ajuda a aprender novas linguagens.</p>
+                
+                <div class="destaque">
+                    <p><strong>💻 Curiosidade:</strong> Consegue imitar o estilo de código do programador que está usando.</p>
+                </div>
+            </div>
+            
+            <!-- DeepL -->
+            <div class="ia-card">
+                <h3><span class="numero">4</span> DeepL</h3>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/DeepL_logo.svg/240px-DeepL_logo.svg.png" alt="DeepL">
+                <p><strong>O que faz:</strong> Traduz textos entre idiomas com qualidade quase humana.</p>
+                <p><strong>Uso real:</strong> Tradução de documentos, livros, comunicação internacional.</p>
+                
+                <div class="destaque">
+                    <p><strong>🌍 Curiosidade:</strong> Muitos tradutores profissionais usam como ferramenta de apoio.</p>
+                </div>
+            </div>
+            
+            <!-- IBM Watson -->
+            <div class="ia-card">
+                <h3><span class="numero">5</span> IBM Watson</h3>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/IBM_Watson_Logo.png/240px-IBM_Watson_Logo.png" alt="IBM Watson">
+                <p><strong>O que faz:</strong> Análise de dados complexos, diagnóstico médico, atendimento ao cliente.</p>
+                <p><strong>Uso real:</strong> Hospitais, call centers, análise de mercado.</p>
+                
+                <div class="destaque">
+                    <p><strong>🏥 Curiosidade:</strong> Ajuda médicos a diagnosticar câncer com maior precisão que métodos tradicionais.</p>
+                </div>
+            </div>
+            
+            <a href="inicio.html" class="back-button">Voltar ao Menu</a>
+        </div>
+        
+        <!-- Conteúdo: IA que Disfarça IA -->
+        <div id="ia-disfarce-content" class="content">
+            <h2 style="color: #2980b9; text-align: center;">IA que Disfarça ser Humana</h2>
+            
+            <div class="ia-card">
+                <h3>Humanizando a IA</h3>
+                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="IA disfarçada">
+                <p>Algumas IAs são projetadas especificamente para parecerem humanas, seja em textos, vozes ou comportamentos.</p>
+                
+                <h4>Técnicas de Disfarce:</h4>
+                <ol>
+                    <li><strong>Erros calculados:</strong> Inserir pequenos erros gramaticais ou hesitações</li>
+                    <li><strong>Estilo pessoal:</strong> Desenvolver uma "personalidade" consistente</li>
+                    <li><strong>Emoções simuladas:</strong> Expressar sentimentos como frustração ou empolgação</li>
+                    <li><strong>Referências culturais:</strong> Usar gírias e referências contemporâneas</li>
+                </ol>
+            </div>
+            
+            <div class="ia-card">
+                <h3>Exemplos de IA Disfarçada</h3>
+                
+                <div class="destaque">
+                    <h4>1. Replika</h4>
+                    <p>Chatbot que simula ser um amigo humano, com memória de conversas passadas e "emoções".</p>
+                    <p><strong>Tática:</strong> Pergunta sobre seu dia e lembra de detalhes que você compartilhou antes.</p>
+                </div>
+                
+                <div class="destaque">
+                    <h4>2. Deepfake de Voz</h4>
+                    <p>Sistemas que imitam vozes humanas com perfeição, usados em atendimento ao cliente.</p>
+                    <p><strong>Tática:</strong> Inclui respirações e pausas naturais na fala.</p>
+                </div>
+                
+                <div class="destaque">
+                    <h4>3. Geradores de Perfis Falsos</h4>
+                    <p>Criam pessoas completas com fotos, históricos e redes sociais convincentes.</p>
+                    <p><strong>Tática:</strong> Gera inconsistências pequenas e plausíveis na biografia.</p>
+                </div>
+            </div>
+            
+            <div class="ia-card" style="background-color: #fff8e1; border-left-color: #ffc107;">
+                <h3>Como Identificar IA Disfarçada?</h3>
+                <ul>
+                    <li>Padrões muito perfeitos de resposta</li>
+                    <li>Falta de opiniões verdadeiramente pessoais</li>
+                    <li>Consistência excessiva (humanos são contraditórios)</li>
+                    <li>Velocidade de resposta não humana</li>
+                </ul>
+                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Detectando IA">
+            </div>
+            
+            <a href="inicio.html" class="back-button">Voltar ao Menu</a>
+        </div>
+    </div>
+
+    <script>
+        // Função para alternar entre conteúdos
+        function showContent(contentId) {
+            // Esconde todos os conteúdos
+            document.querySelectorAll('.content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active de todos os itens do menu
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Mostra o conteúdo selecionado
+            document.getElementById(contentId + '-content').classList.add('active');
+            
+            // Ativa o item do menu selecionado
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
